@@ -305,6 +305,7 @@ public class LaLiga {
 
 		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre ();
 		//ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
+		
 		System.out.println("mostrar por pantalla");
 		
 		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
@@ -320,6 +321,8 @@ public class LaLiga {
 		//HashMap<String, Equipo> equipos =.................
 		// ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		// ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
+		
+		
 	}
 
 }

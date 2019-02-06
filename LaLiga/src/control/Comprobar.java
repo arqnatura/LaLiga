@@ -10,7 +10,7 @@ public class Comprobar {
 
 
 		// 22 enero 2019
-		// Comprueba fichero Partidos
+		// Comprueba fichero Partidos jugados
 
 		public static HashMap<String, Integer> comprobarPartidos(String rutaFichero) {
 			try {
