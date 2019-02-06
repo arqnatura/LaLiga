@@ -303,7 +303,7 @@ public class LaLiga {
 		LaLiga ejercicios = new LaLiga();
 
 
-		ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre (null);
+		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre ();
 		//ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
 		System.out.println("mostrar por pantalla");
 		
