@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,8 +27,68 @@ import modelo.Equipo;
 
 public class LaLiga {
 
+	// 6 de febrero 2019
 	
+	public ArrayList<Equipo> equiposListaOrdenadaId (String rutafichero)
+	
+	{
+		ArrayList<Equipo> lista;
+		lista = crearListaEquipos("ficheros/equipos.txt");
+		lista.sort(new Comparator<Equipo>() {
 
+			@Override
+			public int compare(Equipo eq1, Equipo eq2) {
+				if (eq1.getId() > eq2.getId())
+				return 1;
+				else if (eq1.getId() < eq2.getId())
+				return -1;
+				else;
+				return 0;
+			}
+		});
+		// System.out.println(lista);		
+		return lista;
+	}
+	
+	
+	
+	// 5 de febrero 2019
+	
+		// Obtener un ArrayList ORDENADA por nombre LAARgo del equipo
+		// a partir de la lista obtenida en el método
+		//  crearListaEquipos
+		
+	public ArrayList<Equipo> equiposListaOrdenadaNombre(ArrayList<Equipo> equipos)
+		
+	{
+		ArrayList<Equipo> lista;
+		lista = crearListaEquipos("ficheros/equipos.txt");
+		lista.sort(new Comparator<Equipo>() {
+
+			@Override
+			public int compare(Equipo eq1, Equipo eq2) {
+
+				return eq1.getNombre().compareTo(eq2.getNombre());
+			}
+		});
+		return lista;
+	}
+		
+	public void ordenarMapaPuntosEquipos (HashMap<String,Integer> puntosEquipos)
+	{
+		Set<Entry<String, Integer>> set = puntosEquipos.entrySet();
+        List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
+        Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
+        {
+            public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 )
+            {
+                return (o2.getValue()).compareTo( o1.getValue() );
+            }
+        } );
+        for(Map.Entry<String, Integer> entry:list){
+            System.out.println(entry.getKey()+" ==== "+entry.getValue());
+        }
+	}
 
 	// 31 enero 2019
 	// Muestra la clasificación por puntos de los equipos en un archivo *.txt
@@ -52,26 +114,6 @@ public class LaLiga {
 	}
 	
 
-	public void muestraClasificacionOrdenadaPuntosEquipos(HashMap<String, ArrayList<Integer>> resultados) {
-		// recorrer el HashMap...
-		// obtenemos la lista de claves (K)
-
-
-			for (String clave : resultados.keySet()) {
-				ArrayList<Integer> datos = resultados.get(clave);
-				int puntos = datos.get(0) * 3 + datos.get(1);
-				System.out.println(clave + " => " + puntos);
-				
-			}
-			//Collections.sort( equipos , new Comparator() {
-			//	@Override
-			//	public int compare(LaLiga p1, LaLiga p2) {
-			//		return new Integer(p1.getEdad()).compareTo(new Integer(p2.getEdad()));
-			//	}
-
-			//}
-			
-	}
 
 	// 30 enero 2019
 
@@ -259,12 +301,20 @@ public class LaLiga {
 	
 	public static void main(String[] args) {
 		LaLiga ejercicios = new LaLiga();
-		ejercicios.pruebaSWING(); 									//30 de enero
-		HashMap<String, ArrayList<Integer>> x = ejercicios.resultadosEquipos("ficheros/partidos.txt");
-		ejercicios.muestraPuntosEquipos(x);
-		ejercicios.muestraClasificacionOrdenadaPuntosEquipos(x);
+
+
+		ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre (null);
+		//ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
+		System.out.println("mostrar por pantalla");
+		
+		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
+		
+		// ejercicios.pruebaSWING(); 									//30 de enero
+		// HashMap<String, ArrayList<Integer>> x = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		// ejercicios.muestraPuntosEquipos(x);
+		//ejercicios.ordenarMapaPuntosEquipos (x);
 		//ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
-		ejercicios.muestraClasificacionPuntosEquipos(x);  			//29 de enero
+		// ejercicios.muestraClasificacionPuntosEquipos(x);  			//29 de enero
 		// ArrayList<Equipo> equipos =
 		// ArrayList<Equipo> x = ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		//HashMap<String, Equipo> equipos =.................
