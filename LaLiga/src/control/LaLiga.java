@@ -26,7 +26,23 @@ import javax.swing.JPanel;
 import modelo.Equipo;
 
 public class LaLiga {
+	
+	// 7 de febrero 2019
+	
+	// Obtener datos para la CLASIFICACION con el método generaPuntosEquipos ya creado;
+	// con el Nombre Largo con el método crearMapaEquipos ya creado
+	
+	
+	// public HashMap<String, arrayList<Integer> crearMapaEquipos2(String rutaFichero) {
 
+		
+	
+		
+		
+	//}
+
+	
+	
 	// 6 de febrero 2019
 	
 	public ArrayList<Equipo> equiposListaOrdenadaId (String rutafichero)
@@ -46,7 +62,7 @@ public class LaLiga {
 				return 0;
 			}
 		});
-		// System.out.println(lista);		
+		// System.out.println(" \n"+ lista);		
 		return lista;
 	}
 	
@@ -111,12 +127,23 @@ public class LaLiga {
 			System.out.println(e.getMessage());
 
 		}
+		System.out.println("/n"+ resultados);
 	}
 	
 
 
 	// 30 enero 2019
 
+	public HashMap<String, Integer> generaPuntosEquipos(HashMap<String, ArrayList<Integer>> partidos_GEP) {
+		HashMap<String, Integer> resultado = new HashMap<String, Integer>();
+		for (String clave : partidos_GEP.keySet()) {
+			ArrayList<Integer> datos = partidos_GEP.get(clave);
+			int puntos = datos.get(0) * 3 + datos.get(1);
+			resultado.put(clave, puntos);
+		}
+		return resultado;
+	}
+	
 	// pruebita de SWING (MVC)
 
 	public void pruebaSWING() {
@@ -129,9 +156,11 @@ public class LaLiga {
 		ArrayList<Equipo> equipos = this.crearListaEquipos("ficheros/equipos.txt");
 		
 		Equipo[] arrayEquipos = equipos.toArray(new Equipo[equipos.size()]);
-		
+
 		JComboBox lista = new JComboBox(arrayEquipos);
+		JComboBox resultado = new JComboBox(arrayEquipos);
 		panel.add(lista);
+		panel.add(resultado);
 		panel.add(boton);
 		ventana.pack();
 		ventana.setVisible(true);
@@ -302,27 +331,27 @@ public class LaLiga {
 	public static void main(String[] args) {
 		LaLiga ejercicios = new LaLiga();
 
-
-		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre ();
-		//ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
 		
-		System.out.println("mostrar por pantalla");
+//ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre (Equipo<nombre>);
+		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
+		
+
 		
 		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		
-		// ejercicios.pruebaSWING(); 									//30 de enero
+		ejercicios.pruebaSWING(); 									//30 de enero
 		// HashMap<String, ArrayList<Integer>> x = ejercicios.resultadosEquipos("ficheros/partidos.txt");
 		// ejercicios.muestraPuntosEquipos(x);
-		//ejercicios.ordenarMapaPuntosEquipos (x);
-		//ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
+//ejercicios.ordenarMapaPuntosEquipos (x);
+//ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
 		// ejercicios.muestraClasificacionPuntosEquipos(x);  			//29 de enero
 		// ArrayList<Equipo> equipos =
 		// ArrayList<Equipo> x = ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		//HashMap<String, Equipo> equipos =.................
-		// ejercicios.crearMapaEquipos("ficheros/equipos.txt");
+//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		// ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
-		
-		
+		 ejercicios.crearListaEquipos("ficheros/equipos.txt");
+//	System.out.println("mostrar por pantalla");		
 	}
 
 }
