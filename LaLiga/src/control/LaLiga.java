@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Map.Entry;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -27,20 +25,82 @@ import modelo.Equipo;
 
 public class LaLiga {
 	
+	// 12 de febrero 2019
+	
+	
+	public HashMap<String, ArrayList<Integer>> generaDatosClasificacion(String rutaPartidos){
+		
+	// devuelve un mapa de equipos
+	// por cada equipo hay una lista de contadores
+	// que representan VICTORIAS, EMPATES Y DERROTAS			
+		
+	try {
+		BufferedReader fichero;
+		fichero = new BufferedReader(new FileReader(rutaPartidos));
+		String registro;
+		HashMap<String, Equipo> equipos = this.ordenarMapaPuntosEquipos("ficheros/partidos.txt");	
+		
+		HashMap<String, ArrayList<Integer>> clasificacion = new HashMap<String, ArrayList<Integer>>();
+		while ((registro = fichero.readLine()) != null) {
+			String[] campos = registro.split("#");
+			if (campos[3].equals("")) 			// ultimo partido jugado..
+				break;
+			//String eL = campos[2];
+			//String eV = campos[4];
+			String eL = equipos.get(campos[2]).getNombre();
+			String eV = equipos.get(campos[4]).getNombre();
+			String gL = campos[3];
+			String gV = campos[5];
+			
+			// gracias Byron..!!
+			// si no existe eL, eV lo añadimos al mapa..
+
+			if (!clasificacion.containsKey(eL))
+				clasificacion.put(eL, new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0)));
+
+			if (!clasificacion.containsKey(eV))
+				clasificacion.put(eV, new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0)));
+
+			// cual fue el resultado ..?
+
+			if (gL.compareTo(gV) > 0) {// gana Local
+				clasificacion.get(eL).set(0, clasificacion.get(eL).get(0) + 1);
+				clasificacion.get(eV).set(2, clasificacion.get(eV).get(2) + 1);
+
+			} else if (gL.compareTo(gV) < 0) // gana Visitante
+			{// gana Local
+				clasificacion.get(eL).set(2, clasificacion.get(eL).get(2) + 1);
+				clasificacion.get(eV).set(0, clasificacion.get(eV).get(0) + 1);
+			} else { // empate
+
+				clasificacion.get(eL).set(1, clasificacion.get(eL).get(1) + 1);
+				clasificacion.get(eV).set(1, clasificacion.get(eV).get(1) + 1);
+			}
+
+		}
+		fichero.close();
+		System.out.println("Fin de la lectura del fichero");
+		return clasificacion;
+
+	} catch (FileNotFoundException excepcion) {
+		System.out.println("fichero no encontrado");
+
+	} catch (IOException e) {
+		System.out.println("IO Excepcion");
+	}
+	return null;
+
+}
+	
+	
+	
+	
+	
 	// 7 de febrero 2019
 	
 	// Obtener datos para la CLASIFICACION con el método generaPuntosEquipos ya creado;
 	// con el Nombre Largo con el método crearMapaEquipos ya creado
 	
-	
-	// public HashMap<String, arrayList<Integer> crearMapaEquipos2(String rutaFichero) {
-
-		
-	
-		
-		
-	//}
-
 	
 	
 	// 6 de febrero 2019
@@ -62,7 +122,7 @@ public class LaLiga {
 				return 0;
 			}
 		});
-		// System.out.println(" \n"+ lista);		
+	System.out.println(" \n"+ lista);		
 		return lista;
 	}
 	
@@ -90,19 +150,19 @@ public class LaLiga {
 		return lista;
 	}
 		
-	public void ordenarMapaPuntosEquipos (HashMap<String,Integer> puntosEquipos)
+	public void ordenarMapaPuntosEquipos (HashMap<String, ArrayList<Integer>> puntosEquipos)
 	{
-		Set<Entry<String, Integer>> set = puntosEquipos.entrySet();
-        List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
-        Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
+		Set<Entry<String, ArrayList<Integer>>> set = puntosEquipos.entrySet();
+        List<Entry<String, ArrayList<Integer>>> list = new ArrayList<Entry<String, ArrayList<Integer>>>(set);
+        Collections.sort( list, new Comparator<Map.Entry<String, ArrayList<Integer>>>()
         {
-            public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 )
+            public int compare( Map.Entry<String, ArrayList<Integer>> o1, Map.Entry<String, ArrayList<Integer>> o2 )
             {
-                return (o2.getValue()).compareTo( o1.getValue() );
+                return (o2.getValue().get(3)).compareTo( o1.getValue().get(3) );
             }
         } );
-        for(Map.Entry<String, Integer> entry:list){
-            System.out.println(entry.getKey()+" ==== "+entry.getValue());
+        for(Map.Entry<String, ArrayList<Integer>> entry:list){
+            System.out.println(entry.getKey()+" ==== "+entry.getValue.get(3));
         }
 	}
 
@@ -331,18 +391,23 @@ public class LaLiga {
 	public static void main(String[] args) {
 		LaLiga ejercicios = new LaLiga();
 
-		
+		HashMap<String, Equipo> equipos = ejercicios.crearMapaEquipos("ficheros/partidos.txt");		
+		HashMap<String, ArrayList<Integer>> clasificacionEquipos = ejercicios.generaDatosClasificacion("ficheros/partidos.txt") ;
+
+		ejercicios.ordenarMapaPuntosEquipos (clasificacionEquipos);
+
 //ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre (Equipo<nombre>);
 		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
 		
-
-		
+	
 		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		
-		ejercicios.pruebaSWING(); 									//30 de enero
+
+// ejercicios.pruebaSWING(); 									//30 de enero
 		// HashMap<String, ArrayList<Integer>> x = ejercicios.resultadosEquipos("ficheros/partidos.txt");
 		// ejercicios.muestraPuntosEquipos(x);
-//ejercicios.ordenarMapaPuntosEquipos (x);
+
+
 //ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
 		// ejercicios.muestraClasificacionPuntosEquipos(x);  			//29 de enero
 		// ArrayList<Equipo> equipos =
@@ -350,7 +415,7 @@ public class LaLiga {
 		//HashMap<String, Equipo> equipos =.................
 //ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		// ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
-		 ejercicios.crearListaEquipos("ficheros/equipos.txt");
+//ejercicios.crearListaEquipos("ficheros/equipos.txt");
 //	System.out.println("mostrar por pantalla");		
 	}
 
