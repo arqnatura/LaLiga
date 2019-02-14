@@ -68,18 +68,18 @@ public class Clasificacion {
 	public ArrayList<Equipo> generaClasificacion(String rutaPartidos, String rutaEquipos) {
 		ArrayList<Equipo> resultado;
 		try {
-			// crear lista equipos desde fichero equipos.txt
+															// crear lista equipos desde fichero equipos.txt
 			 resultado = crearListaEquipos(rutaEquipos);
-			//
+
 			BufferedReader fichero;
 			fichero = new BufferedReader(new FileReader(rutaPartidos));
 			String registro;
 			Partido partido;
 			while ((registro = fichero.readLine()) != null) {
 				partido = creaPartido(registro);
-				if (partido == null) // ultimo partido jugado..
+				if (partido == null) 						// ultimo partido jugado..
 					break;
-				// actualiza lista Equipos
+															// actualiza lista Equipos
 				actualizaEquipos(partido, resultado);
 			}
 			fichero.close();
