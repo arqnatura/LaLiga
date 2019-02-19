@@ -21,24 +21,48 @@ import modelo.Partido;
 public class Clasificacion {
 
 	
-	/*public void muestraClasificacion() {
+	public void muestraClasificacion() {
 		JFrame ventana;
 		ventana = new JFrame("CLASIFICACION");
 		JPanel panel = new JPanel();
 		ventana.add(panel);
 
-		ArrayList<Equipo> clasificacion = this.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
+		ArrayList<Equipo> equipos = this.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
 		
 		String[] columnas= {"EQUIPO", "PJ", "PG", "PE", "PP", "GF", "GC"};
-		ArrayList<ArrayList<Objetc>> datos = new ArrayList (columnas, clasificacion.size());
-		modelo = new 
-		
-				modelo.addColumn
 
+		DefaultTableModel modelo = new DefaultTableModel tabla.getModel ();
+			modelo.addColumn("EQUIPO");
+			modelo.addColumn ("PUNTOS");
+			modelo.addColumn ("PJ");
+			modelo.addColumn ("PG");
+			modelo.addColumn ("PE");
+			modelo.addColumn ("PP");
+			modelo.addColumn ("GF");
+			modelo.addColumn ("GC");
+		modelo.addRow (columnas);
+		
+		for (Equipo equipo : equipos) {
+			Object[] vector = { equipo.getNombre(),
+					equipo.getNombre(),
+					equipo.getPuntos(),
+					equipo.getPj(),
+					equipo.getPg(),
+					equipo.getPe(),
+					equipo.getPp(),
+					equipo.getGf(),
+					equipo.getGc(),
+			modelo.addRow(vector);
+			}
+		}
+			
+		JTable tabla = new JTable(modelo);
+		panel.add(tabla);
 		ventana.pack();
 		ventana.setVisible(true);
-	}*/
+	}
 	
+				//Se puede representar en SCENE BUILDER para presentaciones en XML de los resultados Clasificacion
 	
 	public Equipo buscarEquipoEnLista (String nombreCorto, ArrayList<Equipo> equipos)
 	{
@@ -188,7 +212,8 @@ public class Clasificacion {
 		
 		ArrayList <Equipo> clasificacion = ejercicios.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
 		
-		
+		ejercicios.muestraClasificacion();
+
 		System.out.println("Fin del programa");
 	}
 
