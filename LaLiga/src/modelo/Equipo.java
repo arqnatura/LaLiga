@@ -4,6 +4,7 @@ public class Equipo implements Comparable<Equipo> {
 	private int id;
 	private String nombreCorto;
 	private String nombre;
+	private int pj;
 	private int puntos;
 	private int pg;
 	private int pe;
@@ -63,7 +64,15 @@ public class Equipo implements Comparable<Equipo> {
 		this.nombre = nombre;
 	}
 
+	public int getPj() {
+		return pj;
+	}
 
+
+	public void setPj(int pj) {
+		this.pj = pj;
+	}
+	
 	public int getPg() {
 		return pg;
 	}
@@ -121,13 +130,28 @@ public class Equipo implements Comparable<Equipo> {
 
 
 	@Override
-	public int compareTo(Equipo o) {
-		if (this.getId() < o.getId())
+	public int compareTo(Equipo eq) {
+		if (this.getPuntos() > eq.getPuntos())
+			return -1;
+		if (this.getPuntos() < eq.getPuntos())
+			return 1;
+		if ((this.getGf() - this.getGc())>(eq.getGf() - eq.getGc()))
+			return -1;
+		if ((this.getGf() - this.getGc())<(eq.getGf() - eq.getGc()))
+			return 1;
+		if (this.getGf() > eq.getGf())
+			return -1;
+		return 1;
+		
+		/*if (this.getId() < o.getId())
 			return 1;
 		else if (this.getId() > o.getId())
 			return -1;
 		else
-			return 0;
+			return 0;*/	
 	}
+
+
+
 
 }

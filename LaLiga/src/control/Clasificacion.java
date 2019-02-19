@@ -1,16 +1,44 @@
 package control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Equipo;
 import modelo.Partido;
 
 public class Clasificacion {
 
+	
+	/*public void muestraClasificacion() {
+		JFrame ventana;
+		ventana = new JFrame("CLASIFICACION");
+		JPanel panel = new JPanel();
+		ventana.add(panel);
+
+		ArrayList<Equipo> clasificacion = this.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
+		
+		String[] columnas= {"EQUIPO", "PJ", "PG", "PE", "PP", "GF", "GC"};
+		ArrayList<ArrayList<Objetc>> datos = new ArrayList (columnas, clasificacion.size());
+		modelo = new 
+		
+				modelo.addColumn
+
+		ventana.pack();
+		ventana.setVisible(true);
+	}*/
+	
 	
 	public Equipo buscarEquipoEnLista (String nombreCorto, ArrayList<Equipo> equipos)
 	{
@@ -30,19 +58,37 @@ public class Clasificacion {
 		Equipo eL = buscarEquipoEnLista(nCortoL, equipos);
 		Equipo eV = buscarEquipoEnLista(nCortoV, equipos);
 		
-				
-		/*
-		 * if (gL.compareTo(gV) > 0) {// gana Local equipos.get(eL).set(0,
-		 * equipos.get(eL).get(0) + 1); equipos.get(eV).set(2, equipos.get(eV).get(2) +
-		 * 1);
-		 * 
-		 * } else if (gL.compareTo(gV) < 0) // gana Visitante {// gana Local
-		 * equipos.get(eL).set(2, equipos.get(eL).get(2) + 1); equipos.get(eV).set(0,
-		 * equipos.get(eV).get(0) + 1); } else { // empate
-		 * 
-		 * equipos.get(eL).set(1, equipos.get(eL).get(1) + 1); equipos.get(eV).set(1,
-		 * equipos.get(eV).get(1) + 1); }
-		 */
+					// logica del resultado del partido, se suman puntos y goles
+		
+		if (partido.getgL() > partido.getgV())
+		{
+			eL.setPuntos(eL.getPuntos()+3);
+			eL.setPg(eL.getPg()+1);
+			eV.setPp(eV.getPp()+1);
+		}
+		else
+			if (partido.getgL() < partido.getgV())
+			{
+				eV.setPuntos(eV.getPuntos()+3);
+				eV.setPg(eV.getPg()+1);
+				eL.setPp(eL.getPp()+1);
+			}
+			else
+			{
+				eV.setPuntos(eV.getPuntos()+1);
+				eL.setPuntos(eL.getPuntos()+1);
+				eV.setPe(eV.getPe()+1);
+				eL.setPe(eL.getPe()+1);
+			}
+						// los goles se suman siempre independiente de quie haya ganado o perdido
+		eL.setGf(eL.getGf() + partido.getgL());
+		eL.setGc(eL.getGc() + partido.getgV());
+		
+		eV.setGf(eV.getGf() + partido.getgV());
+		eV.setGc(eV.getGc() + partido.getgL());
+		
+		eL.setPj(eL.getPj()+1);
+		eV.setPj(eV.getPj()+1);
 	}
 
 	public Partido creaPartido(String linea) {
@@ -82,6 +128,7 @@ public class Clasificacion {
 															// actualiza lista Equipos
 				actualizaEquipos(partido, resultado);
 			}
+				Collections.sort(resultado, null); 			// ordena segun el compareTO del metodo Equipo.java			
 			fichero.close();
 			return resultado;
 		} catch (FileNotFoundException excepcion) {
@@ -136,9 +183,12 @@ public class Clasificacion {
 		// ArrayList<Equipo> eqOrdenados = ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		// System.out.println("\n" + eqOrdenados);
 		
-		ArrayList<Equipo> clasificacion = ejercicios.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
-		System.out.println(clasificacion);
-
+		//ArrayList<Equipo> clasificacion = ejercicios.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
+		//System.out.println(clasificacion);
+		
+		ArrayList <Equipo> clasificacion = ejercicios.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
+		
+		
 		System.out.println("Fin del programa");
 	}
 
