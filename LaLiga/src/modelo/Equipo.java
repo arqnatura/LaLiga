@@ -1,5 +1,8 @@
 package modelo;
-public class Equipo implements Comparable<Equipo> {
+
+import java.io.Serializable;
+
+public class Equipo implements Serializable, Comparable<Equipo> {
 	
 	private int id;
 	private String nombreCorto;
@@ -150,8 +153,6 @@ public class Equipo implements Comparable<Equipo> {
 		else
 			return 0;*/	
 	}
-
-
 
 
 }
