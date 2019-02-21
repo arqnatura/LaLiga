@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,21 +28,64 @@ import modelo.Partido;
 
 public class Clasificacion {
 	
+	//Dado un equipo mostrar sus jugadores
+	
+	
+	public void leerObjetosEquipos() {
+		ObjectInputStream objetos = null;
+		try {
+			objetos = new ObjectInputStream(new FileInputStream ("ficheros/equipos.obj"));
+
+			while (true) {
+				Equipo equipo = (Equipo) objetos.readObject();
+				System.out.println(equipo.getNombre());
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("error 1");
+		} catch (IOException e) {
+			System.out.println("Fin de la lectura");
+			try {
+			objetos.close();	
+			}
+			catch (){
+				
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("clase no encontrada");
+		}
+
+	}
+		
 	
 	public void crearFicheroObjetoEquipos (String rutaEquipos) {
 		
 		try {
-			FileOutputStream salida = new FileOutputStream("ficheros/equipos2.txt");
-			ObjectOutputStream objetos = new ObjectOutputStream();
-						// recorre equipos.txt, creando objetos equipo
-						// y los grabas en objetos
-			objetos.writeObject(obj);
-			
-			
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+			BufferedReader fichero;
+			fichero = new BufferedReader(new FileReader("ficheros/equipos.txt"));	
+			FileOutputStream salida = new FileOutputStream ("ficheros/equipos.obj");
+			ObjectOutputStream objetos = new ObjectOutputStream(salida);
+
+			String registro;
+			while ((registro = fichero.readLine()) != null) {
+				String[] campos = registro.split("#");
+				Equipo equipo = new Equipo (Integer.parseInt (campos[0], campos[1], campos[2]));
+				equipo.setPuntos(0);
+				equipo.setGc(0);
+				equipo.setGf(0);
+				equipo.setPe(0);
+				equipo.setPg(0);
+				equipo.setPp(0);
+
+			}
+			fichero.close();
+			System.out.println("Fin de la lectura del fichero");
+
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
+		} catch (IOException e) {
+			System.out.println("IO Excepcion");
 		}
 		
 	}
@@ -266,6 +312,9 @@ public class Clasificacion {
 		// ejercicios.entradaTecladoAFichero("ficheros/teclado.txt");
 		
 		// ejercicios.grabarTiradasDado(10);
+		
+		ejercicios.leerObjetosEquipos();
+		ejercicios.muestraClasificacion();
 		
 		System.out.println("Fin del programa");
 	}
