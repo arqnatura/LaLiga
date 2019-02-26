@@ -30,32 +30,32 @@ public class Clasificacion {
 	
 	//Dado un equipo mostrar sus jugadores
 	
-	
 	public void leerObjetosEquipos() {
 		ObjectInputStream objetos = null;
 		try {
-			objetos = new ObjectInputStream(new FileInputStream ("ficheros/equipos.obj"));
+			objetos = new ObjectInputStream(new FileInputStream("ficheros/equipos.obj"));
 
 			while (true) {
-				Equipo equipo = (Equipo) objetos.readObject();
-				System.out.println(equipo.getNombre());
+				 Equipo equipo = (Equipo) objetos.readObject();		
+				 System.out.println(equipo.getNombre());
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("error 1");
+			System.out.println("error1");
 		} catch (IOException e) {
 			System.out.println("Fin de la lectura");
 			try {
-			objetos.close();	
-			}
-			catch (){
-				
+				objetos.close();
+			} catch (IOException e1) {
+
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("clase no encontrada");
+		} catch (java.lang.ClassCastException e) {
+			System.out.println("Casting imposible");
 		}
 
-	}
+	}	
 		
 	
 	public void crearFicheroObjetoEquipos (String rutaEquipos) {
@@ -69,7 +69,7 @@ public class Clasificacion {
 			String registro;
 			while ((registro = fichero.readLine()) != null) {
 				String[] campos = registro.split("#");
-				Equipo equipo = new Equipo (Integer.parseInt (campos[0], campos[1], campos[2]));
+				Equipo equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
 				equipo.setPuntos(0);
 				equipo.setGc(0);
 				equipo.setGf(0);
@@ -313,9 +313,9 @@ public class Clasificacion {
 		
 		// ejercicios.grabarTiradasDado(10);
 		
-		ejercicios.leerObjetosEquipos();
-		ejercicios.muestraClasificacion();
-		
+		// ejercicios.leerObjetosEquipos();
+		// ejercicios.muestraClasificacion();
+		ejercicios.crearFicheroObjetoEquipos("ficheros/equipos.obj");
 		System.out.println("Fin del programa");
 	}
 
