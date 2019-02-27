@@ -38,7 +38,7 @@ public class LaLiga {
 		BufferedReader fichero;
 		fichero = new BufferedReader(new FileReader(rutaPartidos));
 		String registro;
-		HashMap<String, Equipo> equipos = this.ordenarMapaPuntosEquipos(String,  rutaPartidos);	
+		HashMap<String, Equipo> equipos = this.ordenarMapaPuntosEquipos(String rutaPartidos, );	
 		
 		HashMap<String, ArrayList<Integer>> clasificacion = new HashMap<String, ArrayList<Integer>>();
 		while ((registro = fichero.readLine()) != null) {
@@ -91,8 +91,6 @@ public class LaLiga {
 	return null;
 
 }
-	
-	
 	
 	
 	

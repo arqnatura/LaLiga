@@ -314,8 +314,8 @@ public class Clasificacion {
 		// ejercicios.grabarTiradasDado(10);
 		
 		// ejercicios.leerObjetosEquipos();
-		// ejercicios.muestraClasificacion();
-		ejercicios.crearFicheroObjetoEquipos("ficheros/equipos.obj");
+		ejercicios.muestraClasificacion();
+		// ejercicios.crearFicheroObjetoEquipos("ficheros/equipos.obj");
 		System.out.println("Fin del programa");
 	}
 
