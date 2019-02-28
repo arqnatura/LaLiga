@@ -28,7 +28,7 @@ import modelo.Partido;
 
 public class Clasificacion {
 	
-	//Dado un equipo mostrar sus jugadores
+	//Dado un equipo mostrar sus jugadores...
 	
 	public void leerObjetosEquipos() {
 		ObjectInputStream objetos = null;
