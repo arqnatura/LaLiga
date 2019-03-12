@@ -60,6 +60,7 @@ public class Comprobar {
 	}
 	
 	
+	
 	// 12 de marzo de 2019
 	// Prueba de límites. Crear una busqueda binaria de un fichero previamente ordenado.
 	
