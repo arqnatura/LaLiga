@@ -38,17 +38,17 @@ public class LaLiga {
 		BufferedReader fichero;
 		fichero = new BufferedReader(new FileReader(rutaPartidos));
 		String registro;
-		HashMap<String, Equipo> equipos = this.ordenarMapaPuntosEquipos(String rutaPartidos, );	
 		
 		HashMap<String, ArrayList<Integer>> clasificacion = new HashMap<String, ArrayList<Integer>>();
+		
 		while ((registro = fichero.readLine()) != null) {
 			String[] campos = registro.split("#");
 			if (campos[3].equals("")) 			// ultimo partido jugado..
 				break;
-			//String eL = campos[2];
-			//String eV = campos[4];
-			String eL = equipos.get(campos[2]).getNombre();
-			String eV = equipos.get(campos[4]).getNombre();
+			String eL = campos[2];
+			String eV = campos[4];
+			//String eL = equipos.get(campos[2]).getNombre();
+			//String eV = equipos.get(campos[4]).getNombre();
 			String gL = campos[3];
 			String gV = campos[5];
 			
@@ -160,7 +160,7 @@ public class LaLiga {
             }
         } );
         for(Map.Entry<String, ArrayList<Integer>> entry:list){
-            System.out.println(entry.getKey()+" ==== "+entry.getValue.get(3));
+            System.out.println(entry.getKey()+" ==== "+entry.getValue());
         }
 	}
 

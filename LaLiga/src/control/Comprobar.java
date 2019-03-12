@@ -14,37 +14,54 @@ import modelo.Partido;
 public class Comprobar {
 	
 		//12 de marzo de 2019
+		
+		// equipo es el nombre corto XYZ, RMA
+		// Recorrer la LISTA de equipos.txt, preguntando si el nombre corto coincide con alguno...
+		// 
+	
+	
+	public Equipo buscarEquipo (String equipo, ArrayList<Equipo> equipos) {
+		
+		
+		
+	}
+	
+	
+	
+	
 		// Modificar crearMapaEquipos para que devuelva una lista
-	
 		// ArrayList<equipo>
-	
 		// El fichero a leer se llama equipos.txt
 	
-	public ArrayList<Equipo> crearListaEquipos(String rutaFichero) {
+	public ArrayList<Equipo> crearListaEquipos(String rutaEquipos) {
 		ArrayList<Equipo> equipos = new ArrayList<Equipo>();
 			try {
 				BufferedReader fichero;
-				fichero = new BufferedReader(new FileReader(rutaFichero));
+				fichero = new BufferedReader(new FileReader(rutaEquipos));
 					String registro;
-					Partido partido;
+					
 						while ((registro = fichero.readLine()) != null) {
-							String[] campos
-							
-							partido = creaPartido(registro);
-							if (partido == null) 					// ultimo partido jugado..
-								break;
-// actualiza lista Equipos
+							String[] campos = registro.split("#");
+							Equipo e = new Equipo();
+							e.setId(Integer.parseInt(campos[0]));
+							e.setNombreCorto(campos[1]);
+							e.setNombre(campos[2]);
+							e.setGc(0);
+							e.setGf(0);
+							e.setPe(0);
+							e.setPg(0);
+							e.setPp(0);
+							equipos.add(e);
 						}
-						Collections.sort(resultado, null);
 						fichero.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+						System.out.println("Fin lectura fichero");		
+						return equipos;
+				} catch (FileNotFoundException e) {
+					System.out.println(" fichero no encontrado");	
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(" IOException");	
 			}
-					return resultado;
+			return null;
 
 	}
 	
@@ -68,7 +85,7 @@ public class Comprobar {
 	// así vamos buscando en la midad de la mitad
 	
 	
-	public int busquedaBinaria(int aguja, int [] pajar) {
+	/*public int busquedaBinaria(int aguja, int [] pajar) {
 		int izq = 0;
 		int der = pajar.length -1 ;	
 		
@@ -84,7 +101,7 @@ public class Comprobar {
 		
 		
 	}
-	
+	*/
 	
 
 		// 22 enero 2019
@@ -166,9 +183,9 @@ public class Comprobar {
 		// ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		// ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
 
-	int [] pajar= {12,45,46,57,78,90,99,120};
+/*	int [] pajar= {12,45,46,57,78,90,99,120};
 	int aguja=12;
-	ejercicios.busquedaBinaria(99, pajar);
+	ejercicios.busquedaBinaria(99, pajar);*/
 		
 	ejercicios.crearListaEquipos("ficheros/equipos.txt");
 
