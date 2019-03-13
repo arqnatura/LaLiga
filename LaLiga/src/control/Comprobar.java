@@ -9,25 +9,101 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import modelo.Equipo;
+import modelo.Jugador;
 import modelo.Partido;
 
 public class Comprobar {
 	
-		//12 de marzo de 2019
-		
-		// equipo es el nombre corto XYZ, RMA
-		// Recorrer la LISTA de equipos.txt, preguntando si el nombre corto coincide con alguno...
-		// 
+	//13 de marzo de 2019
 	
+	//crear una lista de jugadores, vacia.
+	//Recorrer secuencialmente el fichero
+	//crear el objeto jugador por cada registro del fichero
+	//añadir jugador a la lista.
+	//al terminar el fichero devolver la lista
+	//Devolver null, si hay cualquier excepción
 	
-	public Equipo buscarEquipo (String equipo, ArrayList<Equipo> equipos) {
+	public ArrayList<Jugador> creaListaJugadores (String rutaJugadores)
+	{
+		ArrayList<Jugador> lista = new ArrayList<Jugador>();
 		
-		
-		
+			try {
+				BufferedReader fichero;
+				fichero = new BufferedReader(new FileReader(rutaJugadores));
+				String registro;
+			
+					while ((registro = fichero.readLine()) != null) {
+						String[] campos = registro.split("#");
+						Jugador e = new Jugador();
+						e.setId(Integer.parseInt(campos[0]));
+						e.setNombre(campos[2]);
+						e.setDorsal(Integer.parseInt(campos[6]));
+						e.setIdEquipo(Integer.parseInt(campos[7]));
+						lista.add(e);
+					}
+					fichero.close();
+					System.out.println("Fin lectura fichero");
+			
+					System.out.println(lista);
+					
+					
+			} catch (NumberFormatException e) {
+				System.out.println("Excepción Formato");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("IOException");
+				e.printStackTrace();
+			}		
+
+				
+		return lista;
 	}
 	
 	
 	
+	
+	// Clave-> valor K->V
+	// La clave es el nif.
+	//crear un HashMap, vacia.
+		//recorre secuencialmente el fichero
+		//crear el objeto jugador por cada registro del fichero
+		//añadir jugador al mapa, usando el nif como clave.
+		//al terminar el fichero devolver el mapa
+		//Devolver null, si hay cualquier excepción
+	
+	public HashMap<String, Jugador> creaMapaJugadores (String rutaJugadores){
+		HashMap<String, Jugador> mapa = new HashMap<String, Jugador>();
+		
+		
+		
+		
+		
+		return mapa;
+	}
+	
+	
+	
+	
+	
+		
+		// equipo es el nombre corto XYZ, RMA
+		// Recorrer la LISTA de equipos.txt, preguntando si el nombre corto coincide con alguno...
+		// ArrayList <Equipo>
+		
+	
+	/*public Equipo buscarEquipo (String equipo, ArrayList<Equipo> equipos) {
+		Equipo resultado;
+		for (Equipo equipo : equipos) {
+			if (equipo.getNombreCorto().equals(equipo))
+				return equipo;
+		}
+		System.out.println("Ooops.. algo falla");
+		return null;
+	}		
+		*/
+
+		
+		//12 de marzo de 2019	
 	
 		// Modificar crearMapaEquipos para que devuelva una lista
 		// ArrayList<equipo>
@@ -187,7 +263,11 @@ public class Comprobar {
 	int aguja=12;
 	ejercicios.busquedaBinaria(99, pajar);*/
 		
-	ejercicios.crearListaEquipos("ficheros/equipos.txt");
+	// ejercicios.crearListaEquipos("ficheros/equipos.txt");
+		
+		
+		ejercicios.creaListaJugadores("ficheros/Jugadores.txt");
+	
 
 	}
 

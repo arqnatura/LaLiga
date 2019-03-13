@@ -10,7 +10,7 @@ public class Persona {
 	private String fecha_nac; // AAAAMMDD
 	private char sexo; // 'M' 'F'
    
-	public Persona() {
+	 public Persona() {
 		super();
 		this.nif = "12345678F";
 		this.nombre = "Anónimo";
