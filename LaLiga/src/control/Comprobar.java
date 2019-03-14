@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 import modelo.Equipo;
 import modelo.Jugador;
@@ -71,15 +72,46 @@ public class Comprobar {
 		//al terminar el fichero devolver el mapa
 		//Devolver null, si hay cualquier excepción
 	
-	public HashMap<String, Jugador> creaMapaJugadores (String rutaJugadores){
-		HashMap<String, Jugador> mapa = new HashMap<String, Jugador>();
+	public HashMap<String, Jugador> creaMapaJugadores (String rutaJugadores)
+	{
+		HashMap<String, Jugador> mapaJugadores = new HashMap<String, Jugador>();
+		
+		
+		try {
+			BufferedReader fichero;
+			
+			fichero = new BufferedReader(new FileReader(rutaJugadores));
+			String registro;
+			
+			while ((registro = fichero.readLine()) != null) {
+				String[] campos = registro.split("#");
+				for (int i = 2; i < campos.length; i += 2) {
+					if (mapaJugadores.containsKey(campos[i])) {
+						mapaJugadores.replace(campos[i], (mapaJugadores.get(campos[i], + 1 )));
+					} else {
+						mapaJugadores.put(campos[i], 1);
+					}
+				}
+
+			}
+			fichero.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		
 		
 		
-		
-		
-		return mapa;
+		return mapaJugadores;
 	}
+	
+
+	
+	
 	
 	
 	
@@ -267,8 +299,9 @@ public class Comprobar {
 		
 		
 		ejercicios.creaListaJugadores("ficheros/Jugadores.txt");
-	
-
+	//	ejercicios.creaMapaJugadores("ficheros/Jugadores.txt");
+	//	ejercicios.comprobarPartidos("ficheros/Jugadores.txt");
+		
 	}
 
 }

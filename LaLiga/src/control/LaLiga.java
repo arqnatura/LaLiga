@@ -150,6 +150,8 @@ public class LaLiga {
 		
 	public void ordenarMapaPuntosEquipos (HashMap<String, ArrayList<Integer>> puntosEquipos)
 	{
+		
+	
 		Set<Entry<String, ArrayList<Integer>>> set = puntosEquipos.entrySet();
         List<Entry<String, ArrayList<Integer>>> list = new ArrayList<Entry<String, ArrayList<Integer>>>(set);
         Collections.sort( list, new Comparator<Map.Entry<String, ArrayList<Integer>>>()
@@ -389,10 +391,10 @@ public class LaLiga {
 	public static void main(String[] args) {
 		LaLiga ejercicios = new LaLiga();
 
-		HashMap<String, Equipo> equipos = ejercicios.crearMapaEquipos("ficheros/partidos.txt");		
-		HashMap<String, ArrayList<Integer>> clasificacionEquipos = ejercicios.generaDatosClasificacion("ficheros/partidos.txt") ;
+//		HashMap<String, Equipo> equipos = ejercicios.crearMapaEquipos("ficheros/partidos.txt");		
+//		HashMap<String, ArrayList<Integer>> clasificacionEquipos = ejercicios.generaDatosClasificacion("ficheros/partidos.txt");
 
-		ejercicios.ordenarMapaPuntosEquipos (clasificacionEquipos);
+//		ejercicios.ordenarMapaPuntosEquipos (clasificacionEquipos);
 
 //ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaNombre (Equipo<nombre>);
 		// ArrayList<Equipo> ejecucion = ejercicios.equiposListaOrdenadaId ("ficheros/equipos.txt");
