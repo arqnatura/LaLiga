@@ -3,7 +3,9 @@ package control;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,10 +51,10 @@ public class Comprobar {
 					
 					
 			} catch (NumberFormatException e) {
-				System.out.println("Excepción Formato");
+				System.out.println("Excepción Formato.nulll");
 				e.printStackTrace();
 			} catch (IOException e) {
-				System.out.println("IOException");
+				System.out.println("IOException.null");
 				e.printStackTrace();
 			}		
 
@@ -63,16 +65,16 @@ public class Comprobar {
 	
 	
 	
-	// Clave-> valor K->V
-	// La clave es el nif.
-	//crear un HashMap, vacia.
-		//recorre secuencialmente el fichero
-		//crear el objeto jugador por cada registro del fichero
-		//añadir jugador al mapa, usando el nif como clave.
-		//al terminar el fichero devolver el mapa
-		//Devolver null, si hay cualquier excepción
+		// Clave-> valor K->V
+		// La clave es el nif.
+		// crear un HashMap, vacia.
+		// recorre secuencialmente el fichero
+		// crear el objeto jugador por cada registro del fichero
+		// añadir jugador al mapa, usando el nif como clave.
+		// al terminar el fichero devolver el mapa
+		// Devolver null, si hay cualquier excepción
 	
-	public HashMap<String, Jugador> creaMapaJugadores (String rutaJugadores)
+	/* public HashMap<String, Jugador> creaMapaJugadores (String rutaJugadores)
 	{
 		HashMap<String, Jugador> mapaJugadores = new HashMap<String, Jugador>();
 		
@@ -92,7 +94,6 @@ public class Comprobar {
 						mapaJugadores.put(campos[i], 1);
 					}
 				}
-
 			}
 			fichero.close();
 		} catch (FileNotFoundException e) {
@@ -104,13 +105,12 @@ public class Comprobar {
 		}
 	
 		
-		
-		
+				
 		return mapaJugadores;
 	}
 	
 
-	
+	*/
 	
 	
 	
@@ -272,6 +272,7 @@ public class Comprobar {
 
 		
 		
+	
 
 	public static void main(String[] args) {
 		Comprobar ejercicios = new Comprobar();
@@ -297,8 +298,9 @@ public class Comprobar {
 		
 	// ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		
+
 		
-		ejercicios.creaListaJugadores("ficheros/Jugadores.txt");
+	//	ejercicios.creaListaJugadores("ficheros/Jugadores.txt");
 	//	ejercicios.creaMapaJugadores("ficheros/Jugadores.txt");
 	//	ejercicios.comprobarPartidos("ficheros/Jugadores.txt");
 		
