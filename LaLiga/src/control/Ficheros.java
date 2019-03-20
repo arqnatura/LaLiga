@@ -1,6 +1,7 @@
 package control;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Ficheros {
@@ -36,13 +37,36 @@ public class Ficheros {
 	}
 }
 	
+	public void escrituraFicheros () {
+	
+	String[] lineas = { "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "..." };
 
+	/** FORMA 1 DE ESCRITURA **/
+	FileWriter fichero;
+	try {
+
+		fichero = new FileWriter("ficheros/fichero_escritura.txt");
+
+		// Escribimos linea a linea en el fichero
+		for (String linea : lineas) {
+			fichero.write(linea + "\n");
+		}
+
+		fichero.close();
+
+	} catch (Exception ex) {
+		System.out.println("Mensaje de la excepción: " + ex.getMessage());
+	}
+}
+	
+	
 		
 	public static void main(String[] args) {
 		Ficheros ejercicio = new Ficheros();
 		
-		ejercicio.lecturaFicheros();
+		// ejercicio.lecturaFicheros();
 
+		ejercicio.escrituraFicheros();
 	}
 
 }
