@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CompararFicheros {
 	
 	//27 marzo de 2019
-	// Mezcla de dos ficheros de texto. Ordenados previamente por un campo (CLAVE)
+	// Mezcla de dos ficheros de texto.  Ordenados previamente por un campo (CLAVE)
 	
 	
 	public String leeRegistro (BufferedReader fichero) throws IOException {
