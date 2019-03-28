@@ -35,8 +35,6 @@ public class CompararFicheros {
 		while (true) {
 			String k1 = registro1.split("#")[0];
 			String k2 = registro2.split("#")[0];
-			
-			
 			if  ((k1.compareTo(k2)) < 0) {
 				f3.write(registro1);
 				registro1 = leeRegistro(f1);
