@@ -31,7 +31,7 @@ public class CompararFicheros {
 		String registro1 = leeRegistro(f1);
 		String registro2 = leeRegistro(f2);
 		// abrimos el bucle que rastrea los archivos por las claves que están en la primera columna.
-		// 
+		 
 		while (true) {
 			String k1 = registro1.split("#")[0];
 			String k2 = registro2.split("#")[0];
